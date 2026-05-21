@@ -7,9 +7,6 @@ export class CreateOrderDTO {
 
   @IsNotEmpty()
   @IsString()
-  client!: string;
+  clientId!: string;
 
-  @IsNotEmpty()
-  @IsString()
-  address!: string;
 }
