@@ -46,22 +46,29 @@ export class OrdersService {
         }
     }
 
-    public updateById(
+    public async updateById(
         id: string,
         orderData: OrderInput,
     ): Promise<Order> {
         const { productId, clientId } = orderData;
 
-        return this.prismaService.order.update({
-            where: { id },
-            data: {
-                product: {
-                    connect: { id: productId },
+        try {
+            return await this.prismaService.order.update({
+                where: { id },
+                data: {
+                    product: {
+                        connect: { id: productId },
+                    },
+                    client: {
+                        connect: { id: clientId },
+                    }
                 },
-                client: {
-                    connect: { id: clientId },
-                }
-            },
-        });
+            });
+        } catch (error: any) {
+            if (error.code === 'P2025') {
+                throw new BadRequestException("Order, product or client doesn't exist");
+            }
+            throw error;
+        }
     }
 }

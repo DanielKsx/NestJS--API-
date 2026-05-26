@@ -1,4 +1,4 @@
-import { Transform } from 'class-transformer';
+
 import { IsInt, IsNotEmpty, IsString, Length, Min } from 'class-validator';
 
 export class UpdateProductDTO {

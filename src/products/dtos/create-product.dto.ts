@@ -1,4 +1,4 @@
-import { Transform } from 'class-transformer';
+
 import {
   IsInt,
   IsNotEmpty,
@@ -18,5 +18,7 @@ export class CreateProductDTO {
   @Min(0)
   price!: number;
 
+  @IsString()
+  @IsNotEmpty()
   description!: string;
 }
